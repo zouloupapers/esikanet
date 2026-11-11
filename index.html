@@ -7,7 +7,8 @@
 <script>
 (function(){var t;try{t=localStorage.getItem("esika-theme")}catch(e){}
 if(t!=="light"&&t!=="dark"){t=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
-document.documentElement.setAttribute("data-theme",t);})();
+document.documentElement.setAttribute("data-theme",t);
+if("IntersectionObserver" in window&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("js-anim")}})();
 </script>
 <title>Esika Net</title>
 <meta name="description" content="Esika Net, agence digitale au Congo-Brazzaville : sites web et boutiques en ligne avec Kitoko Web, applications mobiles et web sur mesure.">
@@ -295,6 +296,23 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .foot-col a:hover{text-decoration:underline}
 .foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:44px;padding-top:20px;border-top:1px solid var(--band-line);font:13px var(--font-mono)}
 
+/* Transitions dynamiques */
+.nav{position:relative}
+.nav a{position:relative;z-index:1;transition:color .2s}
+.nav a.active{color:var(--blue);background:transparent}
+.nav-pill{position:absolute;z-index:0;top:0;bottom:0;left:0;width:0;border-radius:8px;background:var(--blue-soft);opacity:0;pointer-events:none;transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),opacity .25s}
+.mobile-menu a.active{color:var(--blue)}
+.progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none}
+.progress span{display:block;height:100%;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--blue),var(--teal))}
+.js-anim .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.2,.8,.2,1),transform .75s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.js-anim .reveal.in{opacity:1;transform:none}
+.js-anim .pipeline::before{transform:scaleX(0);transform-origin:0 50%;transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .2s}
+.js-anim .pipeline.drawn::before{transform:none}
+@media (max-width:980px){.js-anim .pipeline::before{transform:scaleY(0);transform-origin:50% 0}}
+.js-anim .mobile-menu:not([hidden]){animation:menuIn .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+
 /* Responsive */
 @media (max-width:980px){
   .hero-in{grid-template-columns:minmax(0,1fr);gap:40px}
@@ -333,6 +351,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       <img class="only-dark" src="logo-light.png" alt="Esika Net, web &amp; apps" width="134" height="48">
     </a>
     <nav class="nav" aria-label="Navigation principale">
+      <span class="nav-pill" aria-hidden="true"></span>
       <a href="#kitoko-web">Kitoko Web</a>
       <a href="#applications">Nos applications</a>
       <a href="#sur-mesure">Sur mesure</a>
@@ -351,6 +370,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     <a href="#sur-mesure">Application sur mesure</a>
     <a href="#contact">Demander un devis</a>
   </div>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 </header>
 
 <main id="top">
@@ -748,7 +768,18 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
   }
   applyTheme(root.getAttribute("data-theme"), false);
   themeBtn.addEventListener("click", function(){
-    applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    if (!document.startViewTransition || !root.classList.contains("js-anim")) { applyTheme(next, true); return; }
+    var r = themeBtn.getBoundingClientRect();
+    var x = r.left + r.width / 2, y = r.top + r.height / 2;
+    var end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    var vt = document.startViewTransition(function(){ applyTheme(next, true); });
+    vt.ready.then(function(){
+      root.animate(
+        { clipPath: ["circle(0px at " + x + "px " + y + "px)", "circle(" + end + "px at " + x + "px " + y + "px)"] },
+        { duration: 550, easing: "cubic-bezier(.2,.8,.2,1)", pseudoElement: "::view-transition-new(root)" }
+      );
+    }).catch(function(){});
   });
   if (window.matchMedia) {
     var mq = window.matchMedia("(prefers-color-scheme: dark)");
@@ -758,6 +789,77 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       if (!saved) applyTheme(e.matches ? "dark" : "light", false);
     };
     if (mq.addEventListener) mq.addEventListener("change", follow);
+  }
+
+  // Section active dans le menu (pastille qui glisse)
+  var nav = document.querySelector(".nav");
+  var pill = document.querySelector(".nav-pill");
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a, .mobile-menu a'));
+  var current = null;
+  function setActive(id){
+    current = id;
+    navLinks.forEach(function(a){ a.classList.toggle("active", !!id && a.getAttribute("href") === "#" + id); });
+    var cur = nav.querySelector("a.active");
+    if (cur) {
+      pill.style.width = cur.offsetWidth + "px";
+      pill.style.transform = "translateX(" + cur.offsetLeft + "px)";
+      pill.style.opacity = "1";
+    } else {
+      pill.style.opacity = "0";
+    }
+  }
+  navLinks.forEach(function(a){
+    a.addEventListener("click", function(){ setActive(a.getAttribute("href").slice(1)); });
+  });
+  addEventListener("resize", function(){ setActive(current); });
+
+  if ("IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) setActive(e.target.id || null); });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    document.querySelectorAll(".hero, .doors, #kitoko-web, #applications, #sur-mesure, #contact").forEach(function(sec){ spy.observe(sec); });
+  }
+
+  // Barre de progression sous l'en-tête
+  var bar = document.getElementById("progress-bar");
+  var ticking = false;
+  function onScroll(){
+    ticking = false;
+    var max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0) + ")";
+    if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) setActive("contact");
+  }
+  addEventListener("scroll", function(){ if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  // Apparition des blocs au défilement
+  if (root.classList.contains("js-anim")) {
+    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
+    var groups = new Map();
+    targets.forEach(function(el){
+      var i = groups.get(el.parentElement) || 0;
+      groups.set(el.parentElement, i + 1);
+      el.style.setProperty("--d", Math.min(i * 90, 450) + "ms");
+      el.classList.add("reveal");
+    });
+    var shown = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        shown.unobserve(el);
+        if (el.classList.contains("pipeline")) { el.classList.add("drawn"); return; }
+        el.classList.add("in");
+        el.addEventListener("transitionend", function done(ev){
+          if (ev.propertyName !== "opacity") return;
+          el.removeEventListener("transitionend", done);
+          el.classList.remove("reveal", "in");
+          el.style.removeProperty("--d");
+        });
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    targets.forEach(function(el){ shown.observe(el); });
+    var pipe = document.querySelector(".pipeline");
+    if (pipe) shown.observe(pipe);
   }
 
   // Menu mobile
