@@ -839,27 +839,37 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     targets.forEach(function(el){
       var i = groups.get(el.parentElement) || 0;
       groups.set(el.parentElement, i + 1);
-      el.style.setProperty("--d", Math.min(i * 90, 450) + "ms");
+      el.dataset.d = Math.min(i * 90, 450) + "ms";
+      el.style.setProperty("--d", el.dataset.d);
       el.classList.add("reveal");
     });
-    var shown = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (!e.isIntersecting) return;
-        var el = e.target;
-        shown.unobserve(el);
-        if (el.classList.contains("pipeline")) { el.classList.add("drawn"); return; }
-        el.classList.add("in");
-        el.addEventListener("transitionend", function done(ev){
-          if (ev.propertyName !== "opacity") return;
-          el.removeEventListener("transitionend", done);
-          el.classList.remove("reveal", "in");
-          el.style.removeProperty("--d");
-        });
+    // L'effet rejoue à chaque passage, quel que soit le mode (clair ou sombre)
+    function show(el){
+      if (el.classList.contains("pipeline")) { el.classList.add("drawn"); return; }
+      if (!el.classList.contains("reveal") || el.classList.contains("in")) return;
+      el.classList.add("in");
+      el.addEventListener("transitionend", function done(ev){
+        if (ev.propertyName !== "opacity") return;
+        el.removeEventListener("transitionend", done);
+        if (el.classList.contains("in")) { el.classList.remove("reveal", "in"); el.style.removeProperty("--d"); }
       });
+    }
+    function hide(el){
+      if (el.classList.contains("pipeline")) { el.classList.remove("drawn"); return; }
+      el.classList.remove("in");
+      el.style.setProperty("--d", el.dataset.d || "0ms");
+      el.classList.add("reveal");
+    }
+    var enter = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) show(e.target); });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
-    targets.forEach(function(el){ shown.observe(el); });
+    var leave = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (!e.isIntersecting) hide(e.target); });
+    }, { threshold: 0 });
+    var watched = Array.prototype.slice.call(targets);
     var pipe = document.querySelector(".pipeline");
-    if (pipe) shown.observe(pipe);
+    if (pipe) watched.push(pipe);
+    watched.forEach(function(el){ enter.observe(el); leave.observe(el); });
   }
 
   // Menu mobile
