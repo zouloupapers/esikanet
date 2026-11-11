@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Esika Net</title>
 <meta name="description" content="Esika Net, agence digitale au Congo-Brazzaville : sites web et boutiques en ligne avec Kitoko Web, applications mobiles et web sur mesure.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@500;600;700&display=swap">
@@ -89,6 +91,8 @@ a{color:inherit}
 .logo-word{font-family:var(--font-display);font-weight:600;font-size:25px;letter-spacing:-.035em;color:var(--ink)}
 .logo-word b{font-weight:600;color:var(--blue)}
 .logo-tag{font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--blue);margin-top:5px;letter-spacing:.01em}
+.logo img{display:block;height:48px;width:auto}
+.foot-logo{display:block;height:56px;width:auto}
 .nav{display:flex;gap:2px;margin-left:auto}
 .nav a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:500;font-size:15px;color:var(--text)}
 .nav a:hover{background:var(--surface-2);color:var(--ink)}
@@ -307,8 +311,10 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 <header class="site-header">
   <div class="wrap header-in">
     <a class="logo" href="#top" aria-label="Esika Net, accueil">
-      <span class="logo-word">Esika <b>Net</b></span>
-      <span class="logo-tag">&lt;/&gt; web &amp; apps</span>
+      <picture>
+        <source srcset="logo-light.png" media="(prefers-color-scheme: dark)">
+        <img src="logo.png" alt="Esika Net, web &amp; apps" width="134" height="48">
+      </picture>
     </a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="#kitoko-web">Kitoko Web</a>
@@ -664,10 +670,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <span class="logo">
-          <span class="logo-word">Esika <b>Net</b></span>
-          <span class="logo-tag">&lt;/&gt; web &amp; apps</span>
-        </span>
+        <img class="foot-logo" src="logo-light.png" alt="Esika Net, web &amp; apps" width="156" height="56">
         <p class="foot-about">Sites web et applications, au Congo.</p>
       </div>
       <div class="foot-col">
