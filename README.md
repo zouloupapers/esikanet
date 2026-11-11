@@ -1,0 +1,15 @@
+# Esika Net — site officiel
+
+Site vitrine d'Esika Net, agence digitale au Congo-Brazzaville :
+
+- **Kitoko Web** : sites vitrines et boutiques en ligne pour les commerçants
+- **Nos applications** : Zando et Biso Invest
+- **Sur mesure** : développement d'applications mobiles et web
+
+Le site tient dans un seul fichier, `index.html` (HTML, CSS et JavaScript, sans dépendance à installer).
+
+## À compléter avant la mise en ligne
+
+- Numéro WhatsApp : variable `WHATSAPP_NUMBER` dans le script en bas de `index.html`, et le texte « numéro à ajouter » dans la section Contact
+- Adresse e-mail dans la section Contact
+- Prix de l'abonnement « Boutique tout compris »
