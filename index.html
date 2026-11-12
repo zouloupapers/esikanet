@@ -8,6 +8,8 @@
 (function(){var t;try{t=localStorage.getItem("esika-theme")}catch(e){}
 if(t!=="light"&&t!=="dark"){t="light"}
 document.documentElement.setAttribute("data-theme",t);
+var P=["accueil","kitoko-web","entreprises","applications","sur-mesure","contact","confidentialite","conditions","cookies"],h=decodeURIComponent(location.hash.slice(1));
+document.documentElement.setAttribute("data-page",P.indexOf(h)>-1?h:"accueil");document.documentElement.classList.add("js-spa");
 if("IntersectionObserver" in window&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("js-anim")}})();
 </script>
 <title>Esika Net</title>
@@ -55,7 +57,7 @@ if("IntersectionObserver" in window&&!(window.matchMedia&&matchMedia("(prefers-r
 html,body{margin:0}
 img{max-width:100%}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
+html{scroll-padding-top:84px}
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
 h1,h2,h3{font-family:var(--font-display);color:var(--ink);text-wrap:balance;margin:0;letter-spacing:-.02em}
@@ -133,7 +135,7 @@ a{color:inherit}
 
 /* Two doors + trust */
 .doors{padding-block:56px 24px}
-.doors-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.doors-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .door{display:grid;gap:10px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
 .door:hover{border-color:var(--blue);transform:translateY(-2px)}
 .door h2{font-size:24px}
@@ -306,6 +308,46 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 @media (max-width:980px){.ent-panel,.ent-extras{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.ent-incl .feats{grid-template-columns:minmax(0,1fr)}.ent-price,.ent-incl{padding:22px}}
 
+/* Pages, comme une application */
+.js-spa [data-view]{display:none}
+.js-spa[data-page="accueil"] [data-view="accueil"],
+.js-spa[data-page="kitoko-web"] [data-view="kitoko-web"],
+.js-spa[data-page="entreprises"] [data-view="entreprises"],
+.js-spa[data-page="applications"] [data-view="applications"],
+.js-spa[data-page="sur-mesure"] [data-view="sur-mesure"],
+.js-spa[data-page="contact"] [data-view="contact"],
+.js-spa[data-page="confidentialite"] [data-view="confidentialite"],
+.js-spa[data-page="conditions"] [data-view="conditions"],
+.js-spa[data-page="cookies"] [data-view="cookies"]{display:block}
+.js-anim .view-in{animation:viewIn .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.doors{padding-block:56px 88px}
+
+/* Pages légales */
+.legal .wrap{max-width:860px}
+.legal-head{display:grid;gap:12px;margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.legal-head h2{font-size:clamp(30px,4.4vw,44px);line-height:1.1}
+.legal-lead{font-size:18px;color:var(--muted)}
+.legal-date{font:500 13px var(--font-mono);color:var(--muted)}
+.legal-body{display:grid;gap:32px}
+.legal-part{display:grid;gap:10px}
+.legal-part h3{font-size:20px}
+.legal-part p,.legal-part li{max-width:68ch}
+.legal-part ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.legal-part a,.form-hint a{color:var(--blue)}
+.legal-table{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.legal-table table{width:100%;border-collapse:collapse;font-size:15px}
+.legal-table th,.legal-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.legal-table th{font:600 13px var(--font-body);color:var(--muted);background:var(--surface-2)}
+.legal-table tr:last-child td{border-bottom:0}
+.legal-table code{font:500 13px var(--font-mono);color:var(--blue)}
+.legal-nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.legal-nav a{padding:8px 14px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-weight:500;font-size:14px;color:var(--ink)}
+.legal-nav a:hover{border-color:var(--blue);color:var(--blue)}
+.foot-legal{display:flex;flex-wrap:wrap;gap:16px}
+.foot-legal a{color:var(--band-text);text-decoration:none}
+.foot-legal a:hover{text-decoration:underline;text-underline-offset:3px}
+
 /* Transitions dynamiques */
 .nav{position:relative}
 .nav a{position:relative;z-index:1;transition:color .2s}
@@ -356,7 +398,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 <body>
 <header class="site-header">
   <div class="wrap header-in">
-    <a class="logo" href="#top" aria-label="Esika Net, accueil">
+    <a class="logo" href="#accueil" aria-label="Esika Net, accueil">
       <img class="only-light" src="logo.png" alt="Esika Net, web &amp; apps" width="134" height="48">
       <img class="only-dark" src="logo-light.png" alt="Esika Net, web &amp; apps" width="134" height="48">
     </a>
@@ -385,8 +427,8 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
   <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
 </header>
 
-<main id="top">
-  <section class="hero band">
+<main id="accueil">
+  <section class="hero band" data-view="accueil">
     <div class="wrap hero-in">
       <div class="hero-copy">
         <p class="kicker">// agence digitale · Brazzaville &amp; Pointe-Noire</p>
@@ -415,7 +457,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
   </section>
 
-  <section class="doors" aria-label="Nos deux métiers">
+  <section class="doors" data-view="accueil" aria-label="Nos offres">
     <div class="wrap">
       <div class="doors-grid">
         <a class="door" href="#kitoko-web">
@@ -423,6 +465,12 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <h2>Kitoko Web</h2>
           <p>Sites et boutiques en ligne. Dès 25&nbsp;000&nbsp;FCFA.</p>
           <span class="go">Voir les offres →</span>
+        </a>
+        <a class="door" href="#entreprises">
+          <p class="label">// entreprises</p>
+          <h2>Pack Entreprise</h2>
+          <p>Un site pro pour les PME et organisations. Dès 250&nbsp;000&nbsp;FCFA.</p>
+          <span class="go">Voir le pack →</span>
         </a>
         <a class="door" href="#applications">
           <p class="label">// applications</p>
@@ -452,7 +500,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
   </section>
 
-  <section id="kitoko-web" class="section">
+  <section id="kitoko-web" class="section" data-view="kitoko-web">
     <div class="wrap">
       <div class="sec-head">
         <p class="label">// kitoko-web</p>
@@ -531,7 +579,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
   </section>
 
-  <section id="entreprises" class="section ent">
+  <section id="entreprises" class="section ent" data-view="entreprises">
     <div class="wrap">
       <div class="sec-head">
         <p class="label">// entreprises</p>
@@ -580,7 +628,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
   </section>
 
-  <section id="applications" class="section band">
+  <section id="applications" class="section band" data-view="applications">
     <div class="wrap">
       <div class="sec-head">
         <p class="label">// applications</p>
@@ -670,7 +718,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
   </section>
 
-  <section id="sur-mesure" class="section">
+  <section id="sur-mesure" class="section" data-view="sur-mesure">
     <div class="wrap">
       <div class="sec-head">
         <p class="label">// sur-mesure</p>
@@ -701,7 +749,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
   </section>
 
-  <section id="contact" class="section" style="padding-top:0">
+  <section id="contact" class="section" data-view="contact">
     <div class="wrap contact-grid">
       <div class="contact-info">
         <p class="label">// contact</p>
@@ -753,7 +801,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           </div>
           <p class="form-error" id="f-err" hidden>Ajoutez votre nom et votre numéro WhatsApp.</p>
           <button class="btn btn-primary" type="submit">Préparer mon message WhatsApp</button>
-          <p class="form-hint">Vous relisez le message avant l'envoi.</p>
+          <p class="form-hint">Vous relisez le message avant l'envoi. Vos informations sont traitées selon notre <a href="#confidentialite">politique de confidentialité</a>.</p>
         </form>
 
         <div class="devis-ok" id="devis-ok" hidden>
@@ -766,6 +814,234 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <button class="linkish" id="devis-edit" type="button">Modifier ma demande</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="confidentialite" class="section legal" data-view="confidentialite">
+    <div class="wrap">
+      <div class="legal-head">
+        <p class="label">// confidentialité</p>
+        <h2>Politique de confidentialité</h2>
+        <p class="legal-lead">Cette page explique quelles informations nous recevons et ce que nous en faisons.</p>
+        <p class="legal-date">Dernière mise à jour : 12 novembre 2026</p>
+      </div>
+      <div class="legal-body">
+        <div class="legal-part">
+          <h3>1. Qui sommes-nous</h3>
+          <p>Esika Net est une agence digitale du Congo-Brazzaville. Elle édite ce site et la marque Kitoko Web.</p>
+          <ul>
+            <li>Villes : Brazzaville et Pointe-Noire</li>
+            <li>WhatsApp : <a href="https://wa.me/242056068018" target="_blank" rel="noopener">+242 05 606 80 18</a></li>
+            <li>Immatriculation au RCCM : en cours</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>2. Les informations que nous recevons</h3>
+          <ul>
+            <li>Notre formulaire de devis n'enregistre rien sur notre site. Il prépare seulement un message WhatsApp.</li>
+            <li>Si vous envoyez ce message, nous recevons votre nom, votre numéro WhatsApp, votre ville, votre projet et votre message.</li>
+            <li>Si vous devenez client, nous gardons aussi les informations utiles à votre projet et à vos paiements : montant, date et référence Mobile Money.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>3. Pourquoi nous les utilisons</h3>
+          <ul>
+            <li>Répondre à votre demande et vous envoyer un devis.</li>
+            <li>Réaliser et suivre votre projet.</li>
+            <li>Gérer vos paiements et vos abonnements.</li>
+          </ul>
+          <p>Nous ne vendons jamais vos informations. Nous ne vous envoyons pas de publicité sans votre accord.</p>
+        </div>
+        <div class="legal-part">
+          <h3>4. Sur quelle base</h3>
+          <p>Votre accord, quand vous nous écrivez. L'exécution de notre contrat, quand vous êtes client.</p>
+        </div>
+        <div class="legal-part">
+          <h3>5. Qui peut les voir</h3>
+          <ul>
+            <li>L'équipe d'Esika Net.</li>
+            <li>WhatsApp (Meta), qui transporte nos échanges.</li>
+            <li>Les opérateurs et prestataires de paiement (MTN, Airtel), quand vous payez.</li>
+            <li>Netlify, notre hébergeur, qui garde des données techniques de connexion, comme l'adresse IP.</li>
+          </ul>
+          <p>Certains de ces services sont situés hors du Congo, par exemple aux États-Unis.</p>
+        </div>
+        <div class="legal-part">
+          <h3>6. Combien de temps</h3>
+          <ul>
+            <li>Demande sans suite : 2 ans après notre dernier échange.</li>
+            <li>Client : pendant toute la durée du contrat.</li>
+            <li>Factures et pièces comptables : 10 ans, comme le demande le droit OHADA.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>7. Vos droits</h3>
+          <p>Vous pouvez demander à voir, corriger ou supprimer vos informations. Vous pouvez aussi retirer votre accord à tout moment.</p>
+          <p>Écrivez-nous sur WhatsApp. Nous répondons sous 30 jours.</p>
+        </div>
+        <div class="legal-part">
+          <h3>8. Sécurité</h3>
+          <p>Seules les personnes qui travaillent sur votre projet ont accès à vos informations. Notre site est protégé par une connexion chiffrée (HTTPS).</p>
+        </div>
+        <div class="legal-part">
+          <h3>9. Loi applicable</h3>
+          <p>Cette politique respecte la loi n° 29-2019 du 10 octobre 2019 portant protection des données à caractère personnel en République du Congo.</p>
+        </div>
+        <div class="legal-part">
+          <h3>10. Changements</h3>
+          <p>Nous pouvons modifier cette page. La date de mise à jour en haut de page vous l'indique.</p>
+        </div>
+      </div>
+      <nav class="legal-nav" aria-label="Autres pages légales">
+        <a href="#conditions">Conditions d'utilisation</a>
+        <a href="#cookies">Politique des cookies</a>
+        <a href="#accueil">← Retour à l'accueil</a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="conditions" class="section legal" data-view="conditions">
+    <div class="wrap">
+      <div class="legal-head">
+        <p class="label">// conditions</p>
+        <h2>Conditions d'utilisation</h2>
+        <p class="legal-lead">Les règles du site et de nos prestations, en clair.</p>
+        <p class="legal-date">Dernière mise à jour : 12 novembre 2026</p>
+      </div>
+      <div class="legal-body">
+        <div class="legal-part">
+          <h3>1. Objet</h3>
+          <p>Ces conditions encadrent l'utilisation de ce site et les prestations d'Esika Net et de Kitoko Web. En utilisant le site, vous les acceptez.</p>
+        </div>
+        <div class="legal-part">
+          <h3>2. Le site</h3>
+          <p>L'accès au site est gratuit. Nous pouvons le modifier ou l'interrompre, par exemple pour une maintenance.</p>
+        </div>
+        <div class="legal-part">
+          <h3>3. Nos contenus</h3>
+          <p>Les textes, le logo et le design du site appartiennent à Esika Net. Ne les copiez pas sans notre accord.</p>
+          <p>Les aperçus de Zando et de Biso Invest sont des illustrations. Biso Invest fonctionne pour l'instant en mode démo, sans argent réel.</p>
+        </div>
+        <div class="legal-part">
+          <h3>4. Devis</h3>
+          <ul>
+            <li>Une demande de devis est gratuite et sans engagement.</li>
+            <li>Les prix affichés sont en FCFA et donnés à titre indicatif.</li>
+            <li>Le prix final est celui du devis que vous acceptez par écrit, sur WhatsApp ou par e-mail.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>5. Paiement</h3>
+          <ul>
+            <li>Vous payez par MTN Mobile Money ou Airtel Money.</li>
+            <li>Pack Entreprise : 50 % à la commande, 50 % à la livraison.</li>
+            <li>Application sur mesure : un acompte au démarrage, selon le devis.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>6. Abonnements</h3>
+          <ul>
+            <li>Boutique tout compris : 30 000 FCFA à l'installation, puis 10 000 FCFA par mois.</li>
+            <li>Suivi Entreprise : 25 000 FCFA par mois.</li>
+            <li>Chaque mois se paie à l'avance.</li>
+            <li>Sans paiement 15 jours après l'échéance, le site est mis en pause. Il revient dès le paiement.</li>
+            <li>Vous pouvez arrêter à tout moment, avec un préavis d'un mois. Vous pouvez alors récupérer votre nom de domaine.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>7. Remboursement</h3>
+          <ul>
+            <li>L'acompte n'est plus remboursable une fois le travail commencé.</li>
+            <li>Si nous annulons un projet, nous remboursons le travail non réalisé.</li>
+            <li>Un mois d'abonnement commencé est dû.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>8. Livraison</h3>
+          <p>Le délai figure sur votre devis. Il dépend aussi de la réception de vos contenus : textes, photos et logo.</p>
+        </div>
+        <div class="legal-part">
+          <h3>9. À qui appartient le site</h3>
+          <ul>
+            <li>Paiement unique : après le paiement complet, le site vous appartient.</li>
+            <li>Boutique tout compris : le site est à votre disposition tant que l'abonnement est actif.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>10. Vos engagements</h3>
+          <p>Vous devez avoir les droits sur les textes, photos et logos que vous nous confiez. Le contenu de votre site doit respecter la loi.</p>
+        </div>
+        <div class="legal-part">
+          <h3>11. Responsabilité</h3>
+          <p>Nous faisons tout pour que vos sites fonctionnent bien. Nous ne sommes pas responsables des pannes des services extérieurs, comme WhatsApp, les opérateurs de paiement ou l'hébergeur.</p>
+        </div>
+        <div class="legal-part">
+          <h3>12. Liens vers d'autres sites</h3>
+          <p>Le site contient des liens vers d'autres services, comme WhatsApp. Leurs propres règles s'appliquent.</p>
+        </div>
+        <div class="legal-part">
+          <h3>13. Droit applicable</h3>
+          <p>Ces conditions dépendent du droit de la République du Congo. En cas de désaccord, nous cherchons d'abord une solution à l'amiable. À défaut, les tribunaux de Brazzaville sont compétents.</p>
+        </div>
+        <div class="legal-part">
+          <h3>14. Contact</h3>
+          <p>Une question ? Écrivez-nous sur WhatsApp au <a href="https://wa.me/242056068018" target="_blank" rel="noopener">+242 05 606 80 18</a>.</p>
+        </div>
+      </div>
+      <nav class="legal-nav" aria-label="Autres pages légales">
+        <a href="#confidentialite">Politique de confidentialité</a>
+        <a href="#cookies">Politique des cookies</a>
+        <a href="#accueil">← Retour à l'accueil</a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="cookies" class="section legal" data-view="cookies">
+    <div class="wrap">
+      <div class="legal-head">
+        <p class="label">// cookies</p>
+        <h2>Politique des cookies</h2>
+        <p class="legal-lead">Notre site n'utilise aucun cookie publicitaire ni de mesure d'audience.</p>
+        <p class="legal-date">Dernière mise à jour : 12 novembre 2026</p>
+      </div>
+      <div class="legal-body">
+        <div class="legal-part">
+          <h3>1. C'est quoi, un cookie</h3>
+          <p>Un cookie est un petit fichier qu'un site enregistre dans votre navigateur. Il sert souvent à mémoriser un choix ou à suivre une visite.</p>
+        </div>
+        <div class="legal-part">
+          <h3>2. Ce que notre site enregistre</h3>
+          <p>Une seule information, dans le stockage de votre navigateur :</p>
+          <div class="legal-table">
+            <table>
+              <thead><tr><th>Nom</th><th>À quoi ça sert</th><th>Durée</th></tr></thead>
+              <tbody><tr><td><code>esika-theme</code></td><td>Mémoriser le mode clair ou sombre</td><td>Jusqu'à ce que vous l'effaciez</td></tr></tbody>
+            </table>
+          </div>
+          <p>Cette information reste sur votre appareil. Nous n'y avons pas accès.</p>
+        </div>
+        <div class="legal-part">
+          <h3>3. Les services extérieurs</h3>
+          <ul>
+            <li>Google Fonts affiche nos polices d'écriture. Google reçoit votre adresse IP.</li>
+            <li>Netlify, notre hébergeur, garde des données techniques de connexion.</li>
+            <li>WhatsApp s'ouvre quand vous cliquez sur nos boutons. Ses propres règles s'appliquent.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>4. Pourquoi pas de bandeau cookies</h3>
+          <p>Nous n'utilisons aucun cookie de suivi, donc nous n'avons pas besoin de vous demander votre accord. Si nous ajoutons un jour un outil de mesure d'audience, nous vous demanderons votre accord avant.</p>
+        </div>
+        <div class="legal-part">
+          <h3>5. Comment effacer</h3>
+          <p>Ouvrez les réglages de votre navigateur et effacez les données de ce site. Le site s'affichera de nouveau en mode clair.</p>
+        </div>
+      </div>
+      <nav class="legal-nav" aria-label="Autres pages légales">
+        <a href="#confidentialite">Politique de confidentialité</a>
+        <a href="#conditions">Conditions d'utilisation</a>
+        <a href="#accueil">← Retour à l'accueil</a>
+      </nav>
     </div>
   </section>
 </main>
@@ -807,6 +1083,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     </div>
     <div class="foot-base">
       <span>© <span id="year">2026</span> Esika Net · Congo-Brazzaville</span>
+      <nav class="foot-legal" aria-label="Informations légales"><a href="#confidentialite">Confidentialité</a><a href="#conditions">Conditions d'utilisation</a><a href="#cookies">Cookies</a></nav>
       <span>Kitoko Web est une marque d'Esika Net</span>
     </div>
   </div>
@@ -865,17 +1142,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       pill.style.opacity = "0";
     }
   }
-  navLinks.forEach(function(a){
-    a.addEventListener("click", function(){ setActive(a.getAttribute("href").slice(1)); });
-  });
   addEventListener("resize", function(){ setActive(current); });
-
-  if ("IntersectionObserver" in window) {
-    var spy = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if (e.isIntersecting) setActive(e.target.id || null); });
-    }, { rootMargin: "-40% 0px -55% 0px" });
-    document.querySelectorAll(".hero, .doors, #kitoko-web, #entreprises, #applications, #sur-mesure, #contact").forEach(function(sec){ spy.observe(sec); });
-  }
 
   // Barre de progression sous l'en-tête
   var bar = document.getElementById("progress-bar");
@@ -884,14 +1151,69 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     ticking = false;
     var max = document.documentElement.scrollHeight - innerHeight;
     bar.style.transform = "scaleX(" + (max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0) + ")";
-    if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) setActive("contact");
   }
   addEventListener("scroll", function(){ if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
 
+  // Navigation par pages, comme une application : une page à la fois, sans défilement
+  var views = Array.prototype.slice.call(document.querySelectorAll("[data-view]"));
+  var pages = {};
+  views.forEach(function(v){ pages[v.getAttribute("data-view")] = true; });
+  var titles = {
+    "accueil": "Esika Net",
+    "kitoko-web": "Kitoko Web · Esika Net",
+    "entreprises": "Pack Entreprise · Esika Net",
+    "applications": "Nos applications · Esika Net",
+    "sur-mesure": "Application sur mesure · Esika Net",
+    "contact": "Contact · Esika Net",
+    "confidentialite": "Politique de confidentialité · Esika Net",
+    "conditions": "Conditions d'utilisation · Esika Net",
+    "cookies": "Politique des cookies · Esika Net"
+  };
+  var page = null;
+  function pageFromHash(){
+    var h = decodeURIComponent(location.hash.slice(1));
+    return pages[h] ? h : "accueil";
+  }
+  function toTop(){
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    root.style.scrollBehavior = "";
+  }
+  function showPage(name, focus){
+    if (name === page) { toTop(); return; }
+    page = name;
+    root.setAttribute("data-page", name);
+    views.forEach(function(v){
+      v.classList.remove("view-in");
+      if (v.getAttribute("data-view") === name) { void v.offsetWidth; v.classList.add("view-in"); }
+    });
+    toTop();
+    document.title = titles[name] || "Esika Net";
+    setActive(name === "accueil" ? null : name);
+    if (focus) {
+      var h = document.querySelector('[data-view="' + name + '"] h1, [data-view="' + name + '"] h2');
+      if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+    }
+    onScroll();
+  }
+  document.addEventListener("click", function(e){
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var name = a.getAttribute("href").slice(1) || "accueil";
+    if (!pages[name]) return;
+    e.preventDefault();
+    if (name !== page) history.pushState(null, "", name === "accueil" ? location.pathname + location.search : "#" + name);
+    showPage(name, true);
+  });
+  addEventListener("popstate", function(){ showPage(pageFromHash(), false); });
+  addEventListener("hashchange", function(){ showPage(pageFromHash(), false); });
+  showPage(pageFromHash(), false);
+
   // Apparition des blocs au défilement
   if (root.classList.contains("js-anim")) {
-    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .ent-panel, .ent-card, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
+    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .ent-panel, .ent-card, .legal-head, .legal-part, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
     var groups = new Map();
     targets.forEach(function(el){
       var i = groups.get(el.parentElement) || 0;
