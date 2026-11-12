@@ -10,6 +10,5 @@ Le site tient dans un seul fichier, `index.html` (HTML, CSS et JavaScript, sans 
 
 ## À compléter avant la mise en ligne
 
-- Numéro WhatsApp : variable `WHATSAPP_NUMBER` dans le script en bas de `index.html`, et le texte « numéro à ajouter » dans la section Contact
 - Adresse e-mail dans la section Contact
 - Prix de l'abonnement « Boutique tout compris »

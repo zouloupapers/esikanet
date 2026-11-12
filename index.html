@@ -266,6 +266,8 @@ a{color:inherit}
 .facts dt{font:500 13px var(--font-mono);color:var(--muted)}
 .facts dd{margin:0;color:var(--ink);font-weight:500}
 .todo{color:var(--muted);font-style:italic;font-weight:400}
+.facts a.wa{color:var(--blue);text-decoration:none}
+.facts a.wa:hover{text-decoration:underline;text-underline-offset:3px}
 .form-card{padding:30px;background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
 form{display:grid;gap:18px}
 .field{display:grid;gap:7px;min-width:0}
@@ -645,7 +647,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <h2>Parlons de votre projet</h2>
         <p>Remplissez le formulaire. On vous répond sur WhatsApp.</p>
         <dl class="facts">
-          <div><dt>WhatsApp</dt><dd>+242 <span class="todo">numéro à ajouter</span></dd></div>
+          <div><dt>WhatsApp</dt><dd><a class="wa" href="https://wa.me/242056068018" target="_blank" rel="noopener">+242 05 606 80 18</a></dd></div>
           <div><dt>E-mail</dt><dd><span class="todo">adresse à ajouter</span></dd></div>
           <div><dt>Villes</dt><dd>Brazzaville · Pointe-Noire</dd></div>
           <div><dt>Paiement</dt><dd>MTN MoMo · Airtel Money</dd></div>
@@ -734,6 +736,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <h4>Contact</h4>
         <ul>
           <li><a href="#contact">Demander un devis</a></li>
+          <li><a href="https://wa.me/242056068018" target="_blank" rel="noopener">WhatsApp : +242 05 606 80 18</a></li>
           <li>Brazzaville</li>
           <li>Pointe-Noire</li>
         </ul>
@@ -749,7 +752,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 <script>
 (function(){
   // Numéro WhatsApp d'Esika Net au format international, sans + ni espaces (ex. "242061234567").
-  var WHATSAPP_NUMBER = "";
+  var WHATSAPP_NUMBER = "242056068018";
 
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
