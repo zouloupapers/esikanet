@@ -151,7 +151,7 @@ a{color:inherit}
 .offer.featured{border:2px solid var(--blue);box-shadow:var(--shadow)}
 .badge{position:absolute;top:-13px;left:26px;padding:4px 10px;border-radius:999px;background:var(--blue);color:var(--on-blue);font:600 12px var(--font-body)}
 .offer h3{font-size:21px}
-.offer-for{font-size:14px;color:var(--muted);margin-top:4px}
+.offer-for{font-size:14px;color:var(--muted);margin-top:4px;min-height:3.2em}
 .price{display:flex;align-items:baseline;gap:6px;font-family:var(--font-display);color:var(--ink)}
 .price .amount{font-size:38px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .price .cur{font-size:15px;font-weight:600;color:var(--muted)}
@@ -440,8 +440,8 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       <div class="offers">
         <article class="offer">
           <div>
-            <h3>Site vitrine</h3>
-            <p class="offer-for">Pour présenter votre activité</p>
+            <h3>Site vitrine ou catalogue</h3>
+            <p class="offer-for">Pour présenter votre activité ou vos produits en site catalogue</p>
           </div>
           <p class="price"><span class="amount">25&nbsp;000</span><span class="cur">FCFA</span></p>
           <p class="price-note">paiement unique</p>
@@ -451,7 +451,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
             <li>Bouton WhatsApp</li>
             <li>Adapté au téléphone</li>
           </ul>
-          <a class="btn btn-outline" href="#contact" data-projet="Site vitrine">Choisir le site vitrine</a>
+          <a class="btn btn-outline" href="#contact" data-projet="Site vitrine ou catalogue">Choisir le site vitrine ou catalogue</a>
         </article>
 
         <article class="offer featured">
@@ -460,7 +460,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
             <h3>Boutique en ligne</h3>
             <p class="offer-for">Pour vendre vos produits sur internet</p>
           </div>
-          <p class="price"><span class="amount">30&nbsp;000</span><span class="cur">FCFA</span></p>
+          <p class="price"><span class="amount">90&nbsp;000</span><span class="cur">FCFA</span></p>
           <p class="price-note">paiement unique</p>
           <ul class="feats">
             <li>Catalogue de vos produits</li>
@@ -664,7 +664,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
             <div class="field">
               <label for="f-projet">Votre projet</label>
               <select id="f-projet" name="projet">
-                <option>Site vitrine</option>
+                <option>Site vitrine ou catalogue</option>
                 <option selected>Boutique en ligne</option>
                 <option>Boutique tout compris (abonnement)</option>
                 <option>Application sur mesure</option>
@@ -706,7 +706,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       <div class="foot-col">
         <h4>Kitoko Web</h4>
         <ul>
-          <li><a href="#kitoko-web">Site vitrine</a></li>
+          <li><a href="#kitoko-web">Site vitrine ou catalogue</a></li>
           <li><a href="#kitoko-web">Boutique en ligne</a></li>
           <li><a href="#kitoko-web">Boutique tout compris</a></li>
         </ul>
