@@ -11,4 +11,3 @@ Le site tient dans un seul fichier, `index.html` (HTML, CSS et JavaScript, sans 
 ## À compléter avant la mise en ligne
 
 - Adresse e-mail dans la section Contact
-- Prix de l'abonnement « Boutique tout compris »

@@ -156,7 +156,7 @@ a{color:inherit}
 .price .amount{font-size:38px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .price .cur{font-size:15px;font-weight:600;color:var(--muted)}
 .price-note{font:500 13px var(--font-mono);color:var(--blue);margin-top:-10px}
-.feats{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;flex:1}
+.feats{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:grid;gap:10px;flex:1;align-content:start}
 .feats li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:10px;font-size:15px}
 .feats li::before{content:"";width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--ok);box-shadow:inset 0 0 0 5px var(--ok-soft)}
 .offer .btn{width:100%}
@@ -477,13 +477,15 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
             <h3>Boutique tout compris</h3>
             <p class="offer-for">Pour ne s'occuper de rien</p>
           </div>
-          <p class="price"><span class="amount">5&nbsp;000</span><span class="cur">FCFA / mois</span></p>
-          <p class="price-note">abonnement mensuel</p>
+          <p class="price"><span class="amount">10&nbsp;000</span><span class="cur">FCFA / mois</span></p>
+          <p class="price-note">+ 30&nbsp;000&nbsp;FCFA à l'installation</p>
           <ul class="feats">
             <li>Toute la boutique en ligne</li>
-            <li>Nom de domaine en .cg ou .com</li>
+            <li>Nom de domaine en .com</li>
             <li>Hébergement et certificat SSL</li>
-            <li>Maintenance chaque mois</li>
+            <li>Maintenance et mises à jour chaque mois</li>
+            <li>Ajout de vos nouveaux produits, envoyés sur WhatsApp</li>
+            <li>Assistance prioritaire sur WhatsApp</li>
           </ul>
           <a class="btn btn-outline" href="#contact" data-projet="Boutique tout compris (abonnement)">Choisir l'abonnement</a>
         </article>
