@@ -8,7 +8,7 @@
 (function(){var t;try{t=localStorage.getItem("esika-theme")}catch(e){}
 if(t!=="light"&&t!=="dark"){t="light"}
 document.documentElement.setAttribute("data-theme",t);
-var P=["accueil","kitoko-web","entreprises","applications","sur-mesure","contact","confidentialite","conditions","cookies"],h=decodeURIComponent(location.hash.slice(1));
+var P=["accueil","kitoko-web","entreprises","marketing","applications","sur-mesure","contact","confidentialite","conditions","cookies"],h=decodeURIComponent(location.hash.slice(1));
 document.documentElement.setAttribute("data-page",P.indexOf(h)>-1?h:"accueil");document.documentElement.classList.add("js-spa");
 if("IntersectionObserver" in window&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("js-anim")}})();
 </script>
@@ -109,7 +109,7 @@ a{color:inherit}
 .mobile-menu{border-top:1px solid var(--line);padding-block:8px 16px}
 .mobile-menu a{display:block;padding:12px 4px;text-decoration:none;font-weight:500;color:var(--ink);border-bottom:1px solid var(--line)}
 .mobile-menu a:last-child{border-bottom:0;color:var(--blue)}
-@media (max-width:1020px){.nav,.header-cta{display:none}.menu-btn{display:inline-flex;margin-left:0}.theme-btn{margin-left:auto}.header-in{gap:10px}}
+@media (max-width:1100px){.nav,.header-cta{display:none}.menu-btn{display:inline-flex;margin-left:0}.theme-btn{margin-left:auto}.header-in{gap:10px}}
 
 /* Hero */
 .hero{padding-block:72px 84px;background-color:var(--band);background-image:radial-gradient(var(--band-line) 1px,transparent 1.2px);background-size:22px 22px;background-position:-11px -11px}
@@ -135,7 +135,7 @@ a{color:inherit}
 
 /* Two doors + trust */
 .doors{padding-block:56px 24px}
-.doors-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.doors-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .door{display:grid;gap:10px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
 .door:hover{border-color:var(--blue);transform:translateY(-2px)}
 .door h2{font-size:24px}
@@ -313,6 +313,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .js-spa[data-page="accueil"] [data-view="accueil"],
 .js-spa[data-page="kitoko-web"] [data-view="kitoko-web"],
 .js-spa[data-page="entreprises"] [data-view="entreprises"],
+.js-spa[data-page="marketing"] [data-view="marketing"],
 .js-spa[data-page="applications"] [data-view="applications"],
 .js-spa[data-page="sur-mesure"] [data-view="sur-mesure"],
 .js-spa[data-page="contact"] [data-view="contact"],
@@ -352,7 +353,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .endnav{padding-block:52px 60px;border-top:1px solid var(--line)}
 .endnav-head{display:grid;gap:8px;margin-bottom:22px}
 .endnav-head h2{font-size:24px}
-.endnav-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.endnav-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
 .endnav-grid a{position:relative;display:grid;gap:3px;align-content:start;padding:18px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
 .endnav-grid a:hover{border-color:var(--blue);transform:translateY(-2px)}
 .endnav-grid svg{width:24px;height:24px;color:var(--blue);margin-bottom:8px}
@@ -361,9 +362,17 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .endnav-grid .here{display:none;margin-top:6px;font:500 11px var(--font-mono);font-style:normal;color:var(--blue)}
 .endnav-grid a[aria-current="page"]{border-color:var(--blue);background:var(--blue-soft);box-shadow:inset 0 0 0 1px var(--blue)}
 .endnav-grid a[aria-current="page"] .here{display:block}
-@media (max-width:980px){.endnav-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:980px){.endnav-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.endnav-grid a[data-nav="contact"]{grid-column:span 2}}
 @media (max-width:640px){.foot-grid{grid-template-columns:minmax(0,1fr)}.endnav{padding-block:40px 44px}.endnav-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.endnav-grid a{transition:none}.endnav-grid a:hover{transform:none}}
+
+/* Marketing */
+.price .amount.txt{font-size:30px}
+.mk-notes{list-style:none;margin:28px 0 0;padding:20px 22px;border:1px dashed var(--line);border-radius:var(--r);display:grid;gap:10px}
+.mk-notes li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:15px}
+.mk-notes li::before{content:"!";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font:700 12px var(--font-mono)}
+.mk-notes b{color:var(--ink)}
+@media (max-width:980px){.doors-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Transitions dynamiques */
 .nav{position:relative}
@@ -423,6 +432,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       <span class="nav-pill" aria-hidden="true"></span>
       <a href="#kitoko-web">Kitoko Web</a>
       <a href="#entreprises">Entreprises</a>
+      <a href="#marketing">Marketing</a>
       <a href="#applications">Nos applications</a>
       <a href="#sur-mesure">Sur mesure</a>
       <a href="#contact">Contact</a>
@@ -437,6 +447,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
   <div class="wrap mobile-menu" id="mobile-menu" hidden>
     <a href="#kitoko-web">Kitoko Web : sites et boutiques</a>
     <a href="#entreprises">Pack Entreprise</a>
+    <a href="#marketing">Marketing</a>
     <a href="#applications">Nos applications</a>
     <a href="#sur-mesure">Application sur mesure</a>
     <a href="#contact">Demander un devis</a>
@@ -488,6 +499,12 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <h2>Pack Entreprise</h2>
           <p>Un site pro pour les PME et organisations. Dès 250&nbsp;000&nbsp;FCFA.</p>
           <span class="go">Voir le pack →</span>
+        </a>
+        <a class="door" href="#marketing">
+          <p class="label">// marketing</p>
+          <h2>Marketing</h2>
+          <p>Vos réseaux et vos publicités. Dès 15&nbsp;000&nbsp;FCFA par mois.</p>
+          <span class="go">Voir les offres →</span>
         </a>
         <a class="door" href="#applications">
           <p class="label">// applications</p>
@@ -642,6 +659,76 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <p>En option. Votre site en français et en anglais.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="marketing" class="section" data-view="marketing">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">// marketing</p>
+        <h2>Marketing : faites connaître votre activité</h2>
+        <p>Un site ne vend que si on le voit. On anime vos réseaux et vos publicités chaque mois.</p>
+      </div>
+
+      <div class="offers">
+        <article class="offer featured">
+          <span class="badge">Idéal pour les boutiques</span>
+          <div>
+            <h3>Pack Visibilité</h3>
+            <p class="offer-for">Pour les boutiques et les commerçants</p>
+          </div>
+          <p class="price"><span class="amount">15&nbsp;000</span><span class="cur">FCFA / mois</span></p>
+          <p class="price-note">abonnement mensuel</p>
+          <ul class="feats">
+            <li>8 publications par mois</li>
+            <li>2 réseaux au choix : Facebook, Instagram ou TikTok</li>
+            <li>Visuels de vos produits</li>
+            <li>Statuts WhatsApp</li>
+            <li>Bilan chaque mois</li>
+          </ul>
+          <a class="btn btn-primary" href="#contact" data-projet="Pack Visibilité">Choisir le Pack Visibilité</a>
+        </article>
+
+        <article class="offer">
+          <div>
+            <h3>Marketing Entreprise</h3>
+            <p class="offer-for">Pour les PME et les organisations</p>
+          </div>
+          <p class="price"><span class="amount">75&nbsp;000</span><span class="cur">FCFA / mois</span></p>
+          <p class="price-note">à partir de · personnalisable</p>
+          <ul class="feats">
+            <li>Gestion de vos publicités</li>
+            <li>Animation de vos réseaux</li>
+            <li>Calendrier de publications</li>
+            <li>Visuels et textes sur mesure</li>
+            <li>Bilan détaillé chaque mois</li>
+          </ul>
+          <a class="btn btn-outline" href="#contact" data-projet="Marketing Entreprise">Demander un devis</a>
+        </article>
+
+        <article class="offer">
+          <div>
+            <h3>Agent IA</h3>
+            <p class="offer-for">Un assistant qui répond à vos clients</p>
+          </div>
+          <p class="price"><span class="amount txt">Sur devis</span></p>
+          <p class="price-note">installation + forfait mensuel</p>
+          <ul class="feats">
+            <li>Sur WhatsApp ou sur votre site</li>
+            <li>Répond aux questions fréquentes</li>
+            <li>Prend les commandes ou les rendez-vous</li>
+            <li>Disponible 24 h/24</li>
+            <li>Vous gardez la main à tout moment</li>
+          </ul>
+          <a class="btn btn-outline" href="#contact" data-projet="Agent IA">Parler de mon agent IA</a>
+        </article>
+      </div>
+
+      <ul class="mk-notes">
+        <li><span><b>Le budget publicitaire n'est pas compris.</b> Vous le payez directement à Facebook ou TikTok. Nous gérons vos campagnes.</span></li>
+        <li><span><b>Pas de promesse de ventes.</b> Nous promettons un travail régulier, suivi et expliqué chaque mois.</span></li>
+        <li><span><b>Déjà client Boutique tout compris ?</b> Demandez votre tarif réduit pour le Pack Visibilité.</span></li>
+      </ul>
     </div>
   </section>
 
@@ -807,6 +894,9 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
                 <option selected>Boutique en ligne</option>
                 <option>Boutique tout compris (abonnement)</option>
                 <option>Pack Entreprise</option>
+                <option>Pack Visibilité</option>
+                <option>Marketing Entreprise</option>
+                <option>Agent IA</option>
                 <option>Application sur mesure</option>
                 <option>Je ne sais pas encore</option>
               </select>
@@ -923,7 +1013,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <p class="label">// conditions</p>
         <h2>Conditions d'utilisation</h2>
         <p class="legal-lead">Les règles du site et de nos prestations, en clair.</p>
-        <p class="legal-date">Dernière mise à jour : 12 novembre 2026</p>
+        <p class="legal-date">Dernière mise à jour : 13 novembre 2026</p>
       </div>
       <div class="legal-body">
         <div class="legal-part">
@@ -960,6 +1050,8 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <ul>
             <li>Boutique tout compris : 30 000 FCFA à l'installation, puis 10 000 FCFA par mois.</li>
             <li>Suivi Entreprise : 25 000 FCFA par mois.</li>
+            <li>Pack Visibilité : 15 000 FCFA par mois. Marketing Entreprise et Agent IA : selon le devis.</li>
+            <li>Le budget publicitaire n'est jamais compris. Vous le payez directement à la plateforme, comme Facebook ou TikTok.</li>
             <li>Chaque mois se paie à l'avance.</li>
             <li>Sans paiement 15 jours après l'échéance, le site est mis en pause. Il revient dès le paiement.</li>
             <li>Vous pouvez arrêter à tout moment, avec un préavis d'un mois. Vous pouvez alors récupérer votre nom de domaine.</li>
@@ -1073,6 +1165,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <a href="#accueil" data-nav="accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg><b>Accueil</b><span>Présentation</span><em class="here">Vous êtes ici</em></a>
         <a href="#kitoko-web" data-nav="kitoko-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1.5 5.5a2 2 0 0 1-1.9 1.5H7.4a2 2 0 0 1-1.9-1.5L4 7Z"/><path d="M4 7 3 4H1"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><b>Kitoko Web</b><span>Sites et boutiques</span><em class="here">Vous êtes ici</em></a>
         <a href="#entreprises" data-nav="entreprises"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg><b>Entreprises</b><span>Pack Entreprise</span><em class="here">Vous êtes ici</em></a>
+        <a href="#marketing" data-nav="marketing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg><b>Marketing</b><span>Réseaux et publicité</span><em class="here">Vous êtes ici</em></a>
         <a href="#applications" data-nav="applications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg><b>Nos applications</b><span>Zando et Biso Invest</span><em class="here">Vous êtes ici</em></a>
         <a href="#sur-mesure" data-nav="sur-mesure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4"/><path d="m16 8 4 4-4 4"/><path d="m14 5-4 14"/></svg><b>Sur mesure</b><span>Votre application</span><em class="here">Vous êtes ici</em></a>
         <a href="#contact" data-nav="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12Z"/></svg><b>Contact</b><span>Demander un devis</span><em class="here">Vous êtes ici</em></a>
@@ -1180,6 +1273,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     "accueil": "Esika Net",
     "kitoko-web": "Kitoko Web · Esika Net",
     "entreprises": "Pack Entreprise · Esika Net",
+    "marketing": "Marketing · Esika Net",
     "applications": "Nos applications · Esika Net",
     "sur-mesure": "Application sur mesure · Esika Net",
     "contact": "Contact · Esika Net",
@@ -1234,7 +1328,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 
   // Apparition des blocs au défilement
   if (root.classList.contains("js-anim")) {
-    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .ent-panel, .ent-card, .legal-head, .legal-part, .endnav-grid a, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
+    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .ent-panel, .ent-card, .mk-notes, .legal-head, .legal-part, .endnav-grid a, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
     var groups = new Map();
     targets.forEach(function(el){
       var i = groups.get(el.parentElement) || 0;
