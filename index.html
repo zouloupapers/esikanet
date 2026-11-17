@@ -8,7 +8,7 @@
 (function(){var t;try{t=localStorage.getItem("esika-theme")}catch(e){}
 if(t!=="light"&&t!=="dark"){t="light"}
 document.documentElement.setAttribute("data-theme",t);
-var P=["accueil","kitoko-web","entreprises","marketing","applications","sur-mesure","contact","confidentialite","conditions","cookies"],h=decodeURIComponent(location.hash.slice(1));
+var P=["accueil","kitoko-web","entreprises","marketing","sourcing","applications","sur-mesure","contact","confidentialite","conditions","cookies"],h=decodeURIComponent(location.hash.slice(1));
 document.documentElement.setAttribute("data-page",P.indexOf(h)>-1?h:"accueil");document.documentElement.classList.add("js-spa");
 if("IntersectionObserver" in window&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("js-anim")}})();
 </script>
@@ -135,7 +135,9 @@ a{color:inherit}
 
 /* Two doors + trust */
 .doors{padding-block:56px 24px}
-.doors-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.doors-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.door{grid-column:span 2}
+.door:nth-child(n+4){grid-column:span 3}
 .door{display:grid;gap:10px;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
 .door:hover{border-color:var(--blue);transform:translateY(-2px)}
 .door h2{font-size:24px}
@@ -314,6 +316,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .js-spa[data-page="kitoko-web"] [data-view="kitoko-web"],
 .js-spa[data-page="entreprises"] [data-view="entreprises"],
 .js-spa[data-page="marketing"] [data-view="marketing"],
+.js-spa[data-page="sourcing"] [data-view="sourcing"],
 .js-spa[data-page="applications"] [data-view="applications"],
 .js-spa[data-page="sur-mesure"] [data-view="sur-mesure"],
 .js-spa[data-page="contact"] [data-view="contact"],
@@ -353,7 +356,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .endnav{padding-block:52px 60px;border-top:1px solid var(--line)}
 .endnav-head{display:grid;gap:8px;margin-bottom:22px}
 .endnav-head h2{font-size:24px}
-.endnav-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.endnav-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .endnav-grid a{position:relative;display:grid;gap:3px;align-content:start;padding:18px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
 .endnav-grid a:hover{border-color:var(--blue);transform:translateY(-2px)}
 .endnav-grid svg{width:24px;height:24px;color:var(--blue);margin-bottom:8px}
@@ -362,7 +365,6 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .endnav-grid .here{display:none;margin-top:6px;font:500 11px var(--font-mono);font-style:normal;color:var(--blue)}
 .endnav-grid a[aria-current="page"]{border-color:var(--blue);background:var(--blue-soft);box-shadow:inset 0 0 0 1px var(--blue)}
 .endnav-grid a[aria-current="page"] .here{display:block}
-@media (max-width:980px){.endnav-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.endnav-grid a[data-nav="contact"]{grid-column:span 2}}
 @media (max-width:640px){.foot-grid{grid-template-columns:minmax(0,1fr)}.endnav{padding-block:40px 44px}.endnav-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.endnav-grid a{transition:none}.endnav-grid a:hover{transform:none}}
 
@@ -372,7 +374,27 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 .mk-notes li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:15px}
 .mk-notes li::before{content:"!";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font:700 12px var(--font-mono)}
 .mk-notes b{color:var(--ink)}
-@media (max-width:980px){.doors-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.doors-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.door,.door:nth-child(n+4){grid-column:auto}.door:last-child{grid-column:1 / -1}}
+
+/* Esika Sourcing */
+.src-highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.src-hl{display:grid;gap:6px;padding:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.src-hl b{font:600 17px var(--font-display);color:var(--ink)}
+.src-hl span{font-size:14px;color:var(--muted)}
+.src-cats{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:20px}
+.src-cats b{font-weight:600;color:var(--ink);margin-right:4px}
+.src-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:48px}
+.src-col{padding:24px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface)}
+.src-col.no{background:var(--surface-2)}
+.src-col h3{font-size:18px;margin-bottom:12px}
+.src-col ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.kw-src{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-top:20px;padding:20px 22px;border-radius:var(--r);background:var(--blue-soft)}
+.kw-src p{color:var(--ink)}
+.kw-src a{font-weight:600;color:var(--blue);text-decoration:none;white-space:nowrap}
+.kw-src a:hover{text-decoration:underline;text-underline-offset:3px}
+.consent{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;font-weight:400;font-size:14px;color:var(--text);cursor:pointer}
+.consent input{width:18px;height:18px;margin:2px 0 0;padding:0;accent-color:var(--blue)}
+@media (max-width:980px){.src-highlights,.src-cols{grid-template-columns:minmax(0,1fr)}}
 
 /* Transitions dynamiques */
 .nav{position:relative}
@@ -506,6 +528,12 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <p>Vos réseaux et vos publicités. Dès 15&nbsp;000&nbsp;FCFA par mois.</p>
           <span class="go">Voir les offres →</span>
         </a>
+        <a class="door" href="#sourcing">
+          <p class="label">// sourcing</p>
+          <h2>Esika Sourcing</h2>
+          <p>Vos fournisseurs en Chine, avec livraison au Congo.</p>
+          <span class="go">Découvrir →</span>
+        </a>
         <a class="door" href="#applications">
           <p class="label">// applications</p>
           <h2>Le studio d'applications</h2>
@@ -601,6 +629,11 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <span class="chip">Rédaction des textes</span>
         <span class="chip">Photos de vos produits</span>
         <span class="chip">Référencement sur Google</span>
+      </div>
+
+      <div class="kw-src">
+        <p><b>Besoin de produits à vendre ?</b> Esika Sourcing vous met en relation avec nos fournisseurs en Chine, qui livrent au Congo.</p>
+        <a href="#sourcing">Découvrir Esika Sourcing →</a>
       </div>
 
       <h3 class="subhead">Comment ça se passe</h3>
@@ -729,6 +762,65 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <li><span><b>Pas de promesse de ventes.</b> Nous promettons un travail régulier, suivi et expliqué chaque mois.</span></li>
         <li><span><b>Déjà client Boutique tout compris ?</b> Demandez votre tarif réduit pour le Pack Visibilité.</span></li>
       </ul>
+    </div>
+  </section>
+
+  <section id="sourcing" class="section" data-view="sourcing">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">// esika-sourcing</p>
+        <h2>Esika Sourcing : vos fournisseurs en Chine</h2>
+        <p>Vous cherchez des produits à vendre ? On vous met en relation avec des fournisseurs que nous connaissons. Ils livrent jusqu'au Congo.</p>
+      </div>
+
+      <div class="src-highlights">
+        <div class="src-hl"><b>Gratuit pour vous</b><span>Nous sommes rémunérés par le fournisseur.</span></div>
+        <div class="src-hl"><b>Livraison au Congo</b><span>Nos fournisseurs livrent jusqu'au Congo.</span></div>
+        <div class="src-hl"><b>Tous types de produits</b><span>Pour votre boutique ou votre entreprise.</span></div>
+      </div>
+      <div class="src-cats">
+        <b>Par exemple :</b>
+        <span class="chip">Vêtements et chaussures</span><span class="chip">Électronique</span><span class="chip">Maison et cuisine</span>
+        <span class="chip">Beauté</span><span class="chip">Accessoires</span><span class="chip">Matériel professionnel</span>
+      </div>
+
+      <h3 class="subhead">Comment ça marche</h3>
+      <ol class="steps">
+        <li><b>Vous décrivez votre besoin</b><span>Le produit, la quantité et votre budget.</span></li>
+        <li><b>On vous présente un fournisseur</b><span>Dans un groupe WhatsApp, avec nous.</span></li>
+        <li><b>Vous commandez</b><span>Vous payez directement le fournisseur.</span></li>
+        <li><b>Il vous livre au Congo</b><span>On reste disponibles pour vous aider.</span></li>
+      </ol>
+
+      <div class="src-cols">
+        <div class="src-col">
+          <h3>Ce que nous faisons</h3>
+          <ul>
+            <li>Choisir des fournisseurs sérieux.</li>
+            <li>Vous présenter celui qui correspond à votre besoin.</li>
+            <li>Faciliter les échanges avec lui.</li>
+          </ul>
+        </div>
+        <div class="src-col no">
+          <h3>Ce que nous ne faisons pas</h3>
+          <ul>
+            <li>Nous ne vendons pas nous-mêmes.</li>
+            <li>Le prix, le paiement et la livraison se règlent avec le fournisseur.</li>
+            <li>Nous ne garantissons pas les produits ni les délais.</li>
+          </ul>
+        </div>
+      </div>
+
+      <ul class="mk-notes">
+        <li><span><b>Commencez par des échantillons</b> avant une grosse commande.</span></li>
+        <li><span><b>Avant de payer,</b> demandez le délai et le coût de livraison jusqu'à votre ville.</span></li>
+        <li><span><b>À la réception,</b> vérifiez la marchandise et signalez vite tout problème.</span></li>
+      </ul>
+
+      <div class="quote">
+        <p><b>Dites-nous ce que vous cherchez.</b> On revient vers vous sur WhatsApp.</p>
+        <a class="btn btn-primary" href="#contact" data-projet="Esika Sourcing (fournisseurs Chine)">Décrire mon besoin</a>
+      </div>
     </div>
   </section>
 
@@ -897,6 +989,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
                 <option>Pack Visibilité</option>
                 <option>Marketing Entreprise</option>
                 <option>Agent IA</option>
+                <option>Esika Sourcing (fournisseurs Chine)</option>
                 <option>Application sur mesure</option>
                 <option>Je ne sais pas encore</option>
               </select>
@@ -905,6 +998,10 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <div class="field">
             <label for="f-msg">Votre projet en quelques mots</label>
             <textarea id="f-msg" name="message" rows="4" placeholder="Ex. Je vends des pagnes à Poto-Poto."></textarea>
+          </div>
+          <div class="field" id="f-consent-wrap" hidden>
+            <label class="consent" for="f-consent"><input type="checkbox" id="f-consent" name="consent"><span>J'accepte que mes coordonnées soient transmises au fournisseur, situé en Chine.</span></label>
+            <p class="form-error" id="f-err-consent" hidden>Cochez cette case pour que nous puissions vous mettre en relation.</p>
           </div>
           <p class="form-error" id="f-err" hidden>Ajoutez votre nom et votre numéro WhatsApp.</p>
           <button class="btn btn-primary" type="submit">Préparer mon message WhatsApp</button>
@@ -930,7 +1027,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <p class="label">// confidentialité</p>
         <h2>Politique de confidentialité</h2>
         <p class="legal-lead">Cette page explique quelles informations nous recevons et ce que nous en faisons.</p>
-        <p class="legal-date">Dernière mise à jour : 12 novembre 2026</p>
+        <p class="legal-date">Dernière mise à jour : 17 novembre 2026</p>
       </div>
       <div class="legal-body">
         <div class="legal-part">
@@ -956,12 +1053,14 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
             <li>Répondre à votre demande et vous envoyer un devis.</li>
             <li>Réaliser et suivre votre projet.</li>
             <li>Gérer vos paiements et vos abonnements.</li>
+            <li>Vous mettre en relation avec un fournisseur d'Esika Sourcing, si vous le demandez.</li>
           </ul>
           <p>Nous ne vendons jamais vos informations. Nous ne vous envoyons pas de publicité sans votre accord.</p>
         </div>
         <div class="legal-part">
           <h3>4. Sur quelle base</h3>
           <p>Votre accord, quand vous nous écrivez. L'exécution de notre contrat, quand vous êtes client.</p>
+          <p>Pour Esika Sourcing, votre accord explicite : nous ne transmettons jamais vos coordonnées à un fournisseur sans que vous ayez coché la case prévue.</p>
         </div>
         <div class="legal-part">
           <h3>5. Qui peut les voir</h3>
@@ -970,6 +1069,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
             <li>WhatsApp (Meta), qui transporte nos échanges.</li>
             <li>Les opérateurs et prestataires de paiement (MTN, Airtel), quand vous payez.</li>
             <li>Netlify, notre hébergeur, qui garde des données techniques de connexion, comme l'adresse IP.</li>
+            <li>Les fournisseurs d'Esika Sourcing, situés en Chine, seulement si vous demandez une mise en relation et que vous l'acceptez.</li>
           </ul>
           <p>Certains de ces services sont situés hors du Congo, par exemple aux États-Unis.</p>
         </div>
@@ -1013,12 +1113,12 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <p class="label">// conditions</p>
         <h2>Conditions d'utilisation</h2>
         <p class="legal-lead">Les règles du site et de nos prestations, en clair.</p>
-        <p class="legal-date">Dernière mise à jour : 13 novembre 2026</p>
+        <p class="legal-date">Dernière mise à jour : 17 novembre 2026</p>
       </div>
       <div class="legal-body">
         <div class="legal-part">
           <h3>1. Objet</h3>
-          <p>Ces conditions encadrent l'utilisation de ce site et les prestations d'Esika Net et de Kitoko Web. En utilisant le site, vous les acceptez.</p>
+          <p>Ces conditions encadrent l'utilisation de ce site et les prestations d'Esika Net, de Kitoko Web et d'Esika Sourcing. En utilisant le site, vous les acceptez.</p>
         </div>
         <div class="legal-part">
           <h3>2. Le site</h3>
@@ -1093,7 +1193,17 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
           <p>Ces conditions dépendent du droit de la République du Congo. En cas de désaccord, nous cherchons d'abord une solution à l'amiable. À défaut, les tribunaux de Brazzaville sont compétents.</p>
         </div>
         <div class="legal-part">
-          <h3>14. Contact</h3>
+          <h3>14. Esika Sourcing (mise en relation)</h3>
+          <ul>
+            <li>Esika Sourcing met en relation ses clients avec des fournisseurs situés en Chine.</li>
+            <li>Esika Net n'est pas le vendeur. Le prix, le paiement et la livraison se règlent entre le client et le fournisseur.</li>
+            <li>Le service est gratuit pour le client. Esika Net est rémunérée par le fournisseur, par une commission sur les commandes.</li>
+            <li>Nous choisissons nos fournisseurs avec soin, mais nous ne garantissons ni les produits, ni les délais, ni les frais de livraison. Vérifiez-les avec le fournisseur avant de payer.</li>
+            <li>En cas de problème, nous vous aidons à trouver une solution avec le fournisseur.</li>
+          </ul>
+        </div>
+        <div class="legal-part">
+          <h3>15. Contact</h3>
           <p>Une question ? Écrivez-nous sur WhatsApp au <a href="https://wa.me/242056068018" target="_blank" rel="noopener">+242 05 606 80 18</a>.</p>
         </div>
       </div>
@@ -1166,6 +1276,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
         <a href="#kitoko-web" data-nav="kitoko-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1.5 5.5a2 2 0 0 1-1.9 1.5H7.4a2 2 0 0 1-1.9-1.5L4 7Z"/><path d="M4 7 3 4H1"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg><b>Kitoko Web</b><span>Sites et boutiques</span><em class="here">Vous êtes ici</em></a>
         <a href="#entreprises" data-nav="entreprises"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg><b>Entreprises</b><span>Pack Entreprise</span><em class="here">Vous êtes ici</em></a>
         <a href="#marketing" data-nav="marketing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg><b>Marketing</b><span>Réseaux et publicité</span><em class="here">Vous êtes ici</em></a>
+        <a href="#sourcing" data-nav="sourcing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg><b>Esika Sourcing</b><span>Fournisseurs en Chine</span><em class="here">Vous êtes ici</em></a>
         <a href="#applications" data-nav="applications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg><b>Nos applications</b><span>Zando et Biso Invest</span><em class="here">Vous êtes ici</em></a>
         <a href="#sur-mesure" data-nav="sur-mesure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4"/><path d="m16 8 4 4-4 4"/><path d="m14 5-4 14"/></svg><b>Sur mesure</b><span>Votre application</span><em class="here">Vous êtes ici</em></a>
         <a href="#contact" data-nav="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12Z"/></svg><b>Contact</b><span>Demander un devis</span><em class="here">Vous êtes ici</em></a>
@@ -1274,6 +1385,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     "kitoko-web": "Kitoko Web · Esika Net",
     "entreprises": "Pack Entreprise · Esika Net",
     "marketing": "Marketing · Esika Net",
+    "sourcing": "Esika Sourcing · Esika Net",
     "applications": "Nos applications · Esika Net",
     "sur-mesure": "Application sur mesure · Esika Net",
     "contact": "Contact · Esika Net",
@@ -1328,7 +1440,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
 
   // Apparition des blocs au défilement
   if (root.classList.contains("js-anim")) {
-    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .ent-panel, .ent-card, .mk-notes, .legal-head, .legal-part, .endnav-grid a, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
+    var targets = document.querySelectorAll(".hero-copy > *, .terminal, .sec-head, .door, .trust li, .offer, .options, .subhead, .steps li, .ent-panel, .ent-card, .mk-notes, .src-hl, .src-col, .kw-src, .legal-head, .legal-part, .endnav-grid a, .app, .service, .pipeline li, .quote, .contact-info, .form-card, .foot-grid > *");
     var groups = new Map();
     targets.forEach(function(el){
       var i = groups.get(el.parentElement) || 0;
@@ -1391,6 +1503,22 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     });
   });
 
+  // Esika Sourcing : accord explicite avant de transmettre les coordonnées
+  var SRC = "Esika Sourcing (fournisseurs Chine)";
+  var consentWrap = document.getElementById("f-consent-wrap");
+  var consent = document.getElementById("f-consent");
+  var errConsent = document.getElementById("f-err-consent");
+  var msgField = document.getElementById("f-msg");
+  function syncProjet(){
+    var src = projet.value === SRC;
+    consentWrap.hidden = !src;
+    if (!src) errConsent.hidden = true;
+    msgField.placeholder = src ? "Ex. 200 sacs à main, budget 500 000 FCFA, livraison à Brazzaville." : "Ex. Je vends des pagnes à Poto-Poto.";
+  }
+  projet.addEventListener("change", syncProjet);
+  document.querySelectorAll("[data-projet]").forEach(function(btn){ btn.addEventListener("click", syncProjet); });
+  syncProjet();
+
   // Formulaire de devis -> message WhatsApp
   var form = document.getElementById("devis");
   var ok = document.getElementById("devis-ok");
@@ -1411,6 +1539,8 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     });
     err.hidden = !missing;
     if (missing) { (nom.value.trim() ? tel : nom).focus(); return; }
+    if (projet.value === SRC && !consent.checked) { errConsent.hidden = false; consent.focus(); return; }
+    errConsent.hidden = true;
 
     var msg = document.getElementById("f-msg").value.trim();
     var text = "Bonjour Esika Net,\n" +
@@ -1418,7 +1548,8 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       "Projet : " + projet.value + "\n" +
       "Ville : " + document.getElementById("f-ville").value + "\n" +
       (msg ? "Détails : " + msg + "\n" : "") +
-      "Mon WhatsApp : " + tel.value.trim();
+      "Mon WhatsApp : " + tel.value.trim() +
+      (projet.value === SRC ? "\nJ'accepte que mes coordonnées soient transmises au fournisseur." : "");
     out.textContent = text;
     wa.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
     form.hidden = true;
