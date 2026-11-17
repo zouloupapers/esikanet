@@ -89,16 +89,16 @@ a{color:inherit}
 /* Header */
 .site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--header-bg);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
 .header-in{display:flex;align-items:center;gap:20px;height:70px}
-.logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:1}
+.logo{display:inline-flex;flex-direction:column;flex:none;text-decoration:none;line-height:1}
 .logo-word{font-family:var(--font-display);font-weight:600;font-size:25px;letter-spacing:-.035em;color:var(--ink)}
 .logo-word b{font-weight:600;color:var(--blue)}
 .logo-tag{font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--blue);margin-top:5px;letter-spacing:.01em}
 .logo img{display:block;height:48px;width:auto}
 .foot-logo{display:block;height:56px;width:auto}
 .nav{display:flex;gap:2px;margin-left:auto}
-.nav a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:500;font-size:15px;color:var(--text)}
+.nav a{padding:8px 10px;border-radius:8px;text-decoration:none;font-weight:500;font-size:15px;color:var(--text);white-space:nowrap}
 .nav a:hover{background:var(--surface-2);color:var(--ink)}
-.header-cta{min-height:40px;padding:0 16px;font-size:14px}
+.header-cta{min-height:40px;padding:0 16px;font-size:14px;white-space:nowrap}
 .theme-btn{display:inline-grid;place-items:center;flex:none;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 .theme-btn:hover{border-color:var(--blue);color:var(--blue)}
 .theme-btn svg{width:18px;height:18px}
@@ -109,7 +109,7 @@ a{color:inherit}
 .mobile-menu{border-top:1px solid var(--line);padding-block:8px 16px}
 .mobile-menu a{display:block;padding:12px 4px;text-decoration:none;font-weight:500;color:var(--ink);border-bottom:1px solid var(--line)}
 .mobile-menu a:last-child{border-bottom:0;color:var(--blue)}
-@media (max-width:1100px){.nav,.header-cta{display:none}.menu-btn{display:inline-flex;margin-left:0}.theme-btn{margin-left:auto}.header-in{gap:10px}}
+@media (max-width:1260px){.nav,.header-cta{display:none}.menu-btn{display:inline-flex;margin-left:0}.theme-btn{margin-left:auto}.header-in{gap:10px}}
 
 /* Hero */
 .hero{padding-block:72px 84px;background-color:var(--band);background-image:radial-gradient(var(--band-line) 1px,transparent 1.2px);background-size:22px 22px;background-position:-11px -11px}
@@ -455,6 +455,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
       <a href="#kitoko-web">Kitoko Web</a>
       <a href="#entreprises">Entreprises</a>
       <a href="#marketing">Marketing</a>
+      <a href="#chine">Esika Chine</a>
       <a href="#applications">Nos applications</a>
       <a href="#sur-mesure">Sur mesure</a>
       <a href="#contact">Contact</a>
@@ -470,6 +471,7 @@ input[aria-invalid="true"]{border-color:var(--z-corail)}
     <a href="#kitoko-web">Kitoko Web : sites et boutiques</a>
     <a href="#entreprises">Pack Entreprise</a>
     <a href="#marketing">Marketing</a>
+    <a href="#chine">Esika Chine : fournisseurs en Chine</a>
     <a href="#applications">Nos applications</a>
     <a href="#sur-mesure">Application sur mesure</a>
     <a href="#contact">Demander un devis</a>
